@@ -88,78 +88,66 @@ public class UnitConverter {
     }
 
     private static double lengthConverter(String sourceUnit, String targetUnit, double value) {
-        switch (sourceUnit.toLowerCase()) {
-            case "meters":
-                return switch (targetUnit.toLowerCase()) {
-                    case "feet" -> value * 3.28084;
-                    case "kilometers" -> value / 1000;
-                    default -> Double.MIN_VALUE;
-                };
-            case "feet":
-                return switch (targetUnit.toLowerCase()) {
-                    case "meters" -> value * 0.3048;
-                    case "kilometers" -> value * 0.0003048;
-                    default -> Double.MIN_VALUE;
-                };
-            case "kilometers":
-                return switch (targetUnit.toLowerCase()) {
-                    case "meters" -> value * 1000;
-                    case "feet" -> value * 3280.84;
-                    default -> Double.MIN_VALUE;
-                };
-            default:
-                return Double.MIN_VALUE;
-        }
+        return switch (sourceUnit.toLowerCase()) {
+            case "meters" -> switch (targetUnit.toLowerCase()) {
+                case "feet" -> value * 3.28084;
+                case "kilometers" -> value / 1000;
+                default -> Double.MIN_VALUE;
+            };
+            case "feet" -> switch (targetUnit.toLowerCase()) {
+                case "meters" -> value * 0.3048;
+                case "kilometers" -> value * 0.0003048;
+                default -> Double.MIN_VALUE;
+            };
+            case "kilometers" -> switch (targetUnit.toLowerCase()) {
+                case "meters" -> value * 1000;
+                case "feet" -> value * 3280.84;
+                default -> Double.MIN_VALUE;
+            };
+            default -> Double.MIN_VALUE;
+        };
     }
 
     private static double weightConverter(String sourceUnit, String targetUnit, double value) {
-        switch (sourceUnit.toLowerCase()) {
-            case "kilograms":
-                return switch (targetUnit.toLowerCase()) {
-                    case "pounds" -> value * 2.20462;
-                    case "grams" -> value * 1000;
-                    default -> Double.MIN_VALUE;
-                };
-            case "pounds":
-                return switch (targetUnit.toLowerCase()) {
-                    case "kilograms" -> value * 0.453592;
-                    case "grams" -> value * 453.592;
-                    default -> Double.MIN_VALUE;
-                };
-            case "grams":
-                return switch (targetUnit.toLowerCase()) {
-                    case "kilograms" -> value / 1000;
-                    case "pounds" -> value / 453.592;
-                    default -> Double.MIN_VALUE;
-                };
-            default:
-                return Double.MIN_VALUE;
-        }
+        return switch (sourceUnit.toLowerCase()) {
+            case "kilograms" -> switch (targetUnit.toLowerCase()) {
+                case "pounds" -> value * 2.20462;
+                case "grams" -> value * 1000;
+                default -> Double.MIN_VALUE;
+            };
+            case "pounds" -> switch (targetUnit.toLowerCase()) {
+                case "kilograms" -> value * 0.453592;
+                case "grams" -> value * 453.592;
+                default -> Double.MIN_VALUE;
+            };
+            case "grams" -> switch (targetUnit.toLowerCase()) {
+                case "kilograms" -> value / 1000;
+                case "pounds" -> value / 453.592;
+                default -> Double.MIN_VALUE;
+            };
+            default -> Double.MIN_VALUE;
+        };
     }
 
     private static double temperatureConverter(String sourceUnit, String targetUnit, double value) {
-        switch (sourceUnit.toLowerCase()) {
-            case "celsius":
-                return switch (targetUnit.toLowerCase()) {
-                    case "fahrenheit" -> value * 9 / 5 + 32;
-                    case "kelvin" -> value + 273.15;
-                    default -> Double.MIN_VALUE;
-                };
-            case "fahrenheit":
-                return switch (targetUnit.toLowerCase()) {
-                    case "celsius" -> (value - 32) * 5 / 9;
-                    case "kelvin" -> (value + 459.67) * 5 / 9;
-                    default -> Double.MIN_VALUE;
-                };
-            case "kelvin":
-                return switch (targetUnit.toLowerCase()) {
-                    case "celsius" -> value - 273.15;
-                    case "fahrenheit" -> value * 9 / 5 - 459.67;
-                    default -> Double.MIN_VALUE;
-                };
-            default:
-                return Double.MIN_VALUE;
-        }
+        return switch (sourceUnit.toLowerCase()) {
+            case "celsius" -> switch (targetUnit.toLowerCase()) {
+                case "fahrenheit" -> value * 9 / 5 + 32;
+                case "kelvin" -> value + 273.15;
+                default -> Double.MIN_VALUE;
+            };
+            case "fahrenheit" -> switch (targetUnit.toLowerCase()) {
+                case "celsius" -> (value - 32) * 5 / 9;
+                case "kelvin" -> (value + 459.67) * 5 / 9;
+                default -> Double.MIN_VALUE;
+            };
+            case "kelvin" -> switch (targetUnit.toLowerCase()) {
+                case "celsius" -> value - 273.15;
+                case "fahrenheit" -> value * 9 / 5 - 459.67;
+                default -> Double.MIN_VALUE;
+            };
+            default -> Double.MIN_VALUE;
+        };
     }
 
     private static double volumeConverter(String sourceUnit, String targetUnit, double value) {
