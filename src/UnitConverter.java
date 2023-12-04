@@ -151,20 +151,65 @@ public class UnitConverter {
     }
 
     private static double volumeConverter(String sourceUnit, String targetUnit, double value) {
-        // Add volume conversion logic here
-        // Example: liters to gallons, cubic meters to cubic feet, etc.
-        return Double.MIN_VALUE;
+        return switch (sourceUnit.toLowerCase()) {
+            case "liters" -> switch (targetUnit.toLowerCase()) {
+                case "gallons" -> value * 0.264172;
+                case "milliliters" -> value * 1000;
+                default -> Double.MIN_VALUE;
+            };
+            case "gallons" -> switch (targetUnit.toLowerCase()) {
+                case "liters" -> value * 3.78541;
+                case "milliliters" -> value * 3785.41;
+                default -> Double.MIN_VALUE;
+            };
+            case "milliliters" -> switch (targetUnit.toLowerCase()) {
+                case "liters" -> value / 1000;
+                case "gallons" -> value / 3785.41;
+                default -> Double.MIN_VALUE;
+            };
+            default -> Double.MIN_VALUE;
+        };
     }
 
     private static double areaConverter(String sourceUnit, String targetUnit, double value) {
-        // Add area conversion logic here
-        // Example: square meters to square feet, acres to square kilometers, etc.
-        return Double.MIN_VALUE;
+        return switch (sourceUnit.toLowerCase()) {
+            case "squaremeters" -> switch (targetUnit.toLowerCase()) {
+                case "squarefeet" -> value * 10.764;
+                case "acres" -> value * 0.000247105;
+                default -> Double.MIN_VALUE;
+            };
+            case "squarefeet" -> switch (targetUnit.toLowerCase()) {
+                case "squaremeters" -> value * 0.092903;
+                case "acres" -> value * 0.0000229568;
+                default -> Double.MIN_VALUE;
+            };
+            case "acres" -> switch (targetUnit.toLowerCase()) {
+                case "squaremeters" -> value * 4046.86;
+                case "squarefeet" -> value * 43560;
+                default -> Double.MIN_VALUE;
+            };
+            default -> Double.MIN_VALUE;
+        };
     }
 
     private static double speedConverter(String sourceUnit, String targetUnit, double value) {
-        // Add speed conversion logic here
-        // Example: meters per second to miles per hour, kilometers per hour to feet per second, etc.
-        return Double.MIN_VALUE;
+        return switch (sourceUnit.toLowerCase()) {
+            case "meterspersecond" -> switch (targetUnit.toLowerCase()) {
+                case "milespertutorialhour" -> value * 2.23694;
+                case "kilometersperhour" -> value * 3.6;
+                default -> Double.MIN_VALUE;
+            };
+            case "milespertutorialhour" -> switch (targetUnit.toLowerCase()) {
+                case "meterspersecond" -> value * 0.44704;
+                case "kilometersperhour" -> value * 1.60934;
+                default -> Double.MIN_VALUE;
+            };
+            case "kilometersperhour" -> switch (targetUnit.toLowerCase()) {
+                case "meterspersecond" -> value * 0.277778;
+                case "milespertutorialhour" -> value * 0.621371;
+                default -> Double.MIN_VALUE;
+            };
+            default -> Double.MIN_VALUE;
+        };
     }
 }
